@@ -23,6 +23,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int choice = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
               key: Key('btc-usd-text')),
           onPressed: () {
 
-              double temp = 0;
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(usd: temp, btc: temp)));
+              choice = 1;
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(chosen: choice)));
           },
           style: TextButton.styleFrom(
               backgroundColor: Color(0xFF84DCC6),
@@ -53,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: TextStyle(fontSize: 14, color: Colors.black),
                 key: Key('usd-btc-text')),
             onPressed: () {
-              double temp = 0;
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(usd: temp, btc: temp)));
+              choice = 2;
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(chosen: choice)));
             },
             style: TextButton.styleFrom(
                 backgroundColor: Color(0xFFFFA69E),

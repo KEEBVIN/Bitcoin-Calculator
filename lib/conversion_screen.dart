@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 
 class ConversionScreen extends StatefulWidget {
-  const ConversionScreen({Key key, @required this.usd, this.btc})
+  const ConversionScreen({Key key, @required this.chosen})
       : super(key: key);
-  final double usd;
-  final double btc;
+  final int chosen;
+
 
   @override
   State<ConversionScreen> createState() => _ConversionScreenState();
