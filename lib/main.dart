@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'conversion_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -31,25 +32,36 @@ class _MyHomePageState extends State<MyHomePage> {
       children: [
         ElevatedButton(
           child: Text("BTC to USD",
-              style: TextStyle(fontSize: 14, color: Colors.black)),
-          onPressed: () => {},
+              style: TextStyle(fontSize: 14, color: Colors.black),
+              key: Key('btc-usd-text')),
+          onPressed: () {
+
+              double temp = 0;
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(usd: temp, btc: temp)));
+          },
           style: TextButton.styleFrom(
               backgroundColor: Color(0xFF84DCC6),
               minimumSize: Size(280, 46),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20))),
+          key: Key('btc-usd-btn'),
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(0, 20, 0, 0,),
           child: ElevatedButton(
             child: Text("USD to BTC",
-                style: TextStyle(fontSize: 14, color: Colors.black)),
-            onPressed: () => {},
+                style: TextStyle(fontSize: 14, color: Colors.black),
+                key: Key('usd-btc-text')),
+            onPressed: () {
+              double temp = 0;
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(usd: temp, btc: temp)));
+            },
             style: TextButton.styleFrom(
                 backgroundColor: Color(0xFFFFA69E),
                 minimumSize: Size(280, 46),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20))),
+            key: Key('usd-btc-btn')
           ),
         ),
       ],
