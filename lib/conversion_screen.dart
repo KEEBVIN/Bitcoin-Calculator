@@ -106,13 +106,13 @@ class _ConversionScreenState extends State<ConversionScreen> {
                       choice = true;
                       if (input) {
                         val = ConversionTools.usdToBtc(
-                            double.parse(textFieldController.text));
+                            double.parse(textFieldController.text), 10);
                       } else {}
                     } else {
                       choice = false;
                       if (input) {
                         val = ConversionTools.btcToUsd(
-                            double.parse(textFieldController.text));
+                            double.parse(textFieldController.text), 10);
                       } else {}
                     }
                   },
