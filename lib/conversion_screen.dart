@@ -4,8 +4,10 @@ import 'main.dart';
 import 'conversion_tools.dart';
 
 class ConversionScreen extends StatefulWidget {
-  const ConversionScreen({Key key, @required this.chosen}) : super(key: key);
+  const ConversionScreen({Key key, @required this.chosen, this.currentValue})
+      : super(key: key);
   final int chosen;
+  final Future<String> currentValue;
 
   @override
   State<ConversionScreen> createState() => _ConversionScreenState();
@@ -18,6 +20,7 @@ class _ConversionScreenState extends State<ConversionScreen> {
   //if choice == true then it chose the first button, otherwise it is the second button
   bool choice = true;
   double val = 0;
+  double btcVal = 0;
 
   void checkInput() {
     String inputText = textFieldController.text;
@@ -49,11 +52,23 @@ class _ConversionScreenState extends State<ConversionScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                valid ? (choice ? "${val} USD" : "${val} BTC") : "",
-                style: TextStyle(fontSize: 20, color: Colors.green),
-                key: Key('valid-text'),
-              ),
+              FutureBuilder<String>(
+                  future: widget.currentValue,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      //converting the btc string to a double 
+                       btcVal = double.parse(snapshot.data);
+                      return Text(
+                        valid ? (choice ? "${val} USD" : "${val} BTC") :" ",
+                        style: TextStyle(fontSize: 20, color: Colors.green),
+                        key: Key('valid-text'),
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    return CircularProgressIndicator();
+                  }),
+
               // ***TEXT BOX***
               Container(
                   child: Card(
@@ -105,14 +120,14 @@ class _ConversionScreenState extends State<ConversionScreen> {
                     if (widget.chosen == 1) {
                       choice = true;
                       if (input) {
-                        val = ConversionTools.usdToBtc(
-                            double.parse(textFieldController.text));
+                        val = ConversionTools.btcToUsd(
+                            double.parse(textFieldController.text), btcVal);
                       } else {}
                     } else {
                       choice = false;
                       if (input) {
-                        val = ConversionTools.btcToUsd(
-                            double.parse(textFieldController.text));
+                        val = ConversionTools.usdToBtc(
+                            double.parse(textFieldController.text), btcVal);
                       } else {}
                     }
                   },

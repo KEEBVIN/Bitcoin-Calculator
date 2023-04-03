@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'conversion_screen.dart';
+import 'conversion_tools.dart';
+import 'package:http/http.dart' as http;
+import 'globals.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,8 +26,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // Value of bitcoin from retrieval in api
+  Future<String> currentValue; 
+  // Checking what is passed 
   int choice = 0;
   @override
+  void initState() {
+    super.initState();
+    currentValue = ConversionTools.fetchBitcoinVal(httpClient);
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
@@ -38,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {
 
               choice = 1;
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(chosen: choice)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(chosen: choice, currentValue: currentValue,)));
           },
           style: TextButton.styleFrom(
               backgroundColor: Color(0xFF84DCC6),
@@ -55,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 key: Key('usd-btc-text')),
             onPressed: () {
               choice = 2;
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(chosen: choice)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ConversionScreen(chosen: choice, currentValue: currentValue,)));
             },
             style: TextButton.styleFrom(
                 backgroundColor: Color(0xFFFFA69E),
