@@ -2,7 +2,9 @@
 A cross-platform mobile app in Flutter with real-time Bitcoin-to-USD conversion via REST API, developed using Test-Driven Development and Continuous Integration practices utilizing the pair-programming agile methodology. 
 
 ## Features
-
+- Supports real-time Conversion between USD -> BTC
+- Supports real-time Conversion between BTC -> USD
+- Clean, intuitive UI design
 ## Built With
 - Flutter
 - Dart
